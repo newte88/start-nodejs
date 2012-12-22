@@ -23,6 +23,7 @@ var server = http.createServer( function ( request, response) {
     // http://nodejs.org/api/zlib.html
     // 安全. - 对 pathname 处理.
     // path.normalize..
+    console.log( pathname );
     route.init( pathname, request, response );
 });
 

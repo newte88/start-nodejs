@@ -7,6 +7,7 @@ var path = require( 'path' );
 var util = require( 'util' );
 var mx = require( './mx' );
 var box =  path.resolve( './list' );
+var include = require( './include' );
 var extname = '.markdown';
 var index = 1;
 
@@ -18,7 +19,7 @@ function formatTime( time ) {
     var hour = date.getHours();
     var minute = date.getMinutes();
     var second = date.getSeconds();
-    return [fullYear, month, day].join( '-' ) + ' ' + [hour, minute, second].join( ':' );
+    return util.format( '%d-%d-%d %d:%d:%d', fullYear, month, day, hour, minute, second );
 }
 
 function prepareMarkdownFiles() {
@@ -55,11 +56,11 @@ function readFileInfo( file ) {
             return;
         }
 
-        var tmp = data.split(/\r\n/);
+        var tmp = data.split(/\r?\n/);
         for ( var i = 0, l = tmp.length; i < l; i++ ) {
             var item = tmp[i];
-            item.replace(/^#([^#]+)/g, function (match, m) {
-                title = m;
+            item.replace(/^(#)([^#]+)\1?$/g, function (match, a, b ) {
+                title = b;
             });
             if ( title ) {
                 break;
@@ -89,9 +90,9 @@ function createIndexPage( list ) {
     }
     var index = path.resolve( './index.txt' );
     var indexMarkdown = path.resolve( './index.markdown' );
-    var txt = fs.readFileSync( index, 'utf8' );
-    txt = txt.replace( '{{page_list}}', text )
-        .replace( '{{current_time}}', formatTime( Date.now() ) );
+    var txt = include( index );
+    txt = txt.replace( '{{page_list}}', text ).replace( '{{current_time}}', formatTime( Date.now() ) );
+
     fs.writeFileSync( indexMarkdown, txt, 'utf8');
     console.log( 'update' );
 }
