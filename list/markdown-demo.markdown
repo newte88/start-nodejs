@@ -10,15 +10,17 @@ Also install `md2html` to `/user/local/bin` (or whereever)
 
 > 北京傲游天下科技有限公司
 
-		1987\.baidu.com
-		console.log( 'test' );
-		/JavaScript/.test( 'javascript' );
+    <div>test</div>
+    1987\.baidu.com.
+    console.log( 'test' );
+    /JavaScript/.test( 'javascript' );
+
 
 *from Beijing*
 
 8:44 下午 星期六, 十二月 15, 2012
 
-<img src="/images/desk.jpg" width="400px" />
+<img src="/images/desk.jpg" width="400px" /></img>
 
 <!-- Markdown 注释同 HTML 标签 -->
 <!-- ![desk](/images/desk.jpg) -->

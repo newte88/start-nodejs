@@ -1,5 +1,9 @@
 
-#english
+
+
+
+
+#english#
 
 1. I see． 我明白了。
 2. I quit! 我不干了!
