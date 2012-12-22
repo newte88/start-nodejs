@@ -1,0 +1,6 @@
+##redky's Blog##
+by [@redky][] {{current_time}}
+
+{{page_list}}
+
+[@redky]: http://weibo.com/alizhan
