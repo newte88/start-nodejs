@@ -8,7 +8,7 @@ var util = require( 'util' );
 var mx = require( './mx' );
 var box =  path.resolve( './list' );
 var include = require( './include' );
-var extname = '.markdown';
+var extnames = [ '.md', '.markdown' ];
 var index = 1;
 
 function formatTime( time ) {
@@ -33,7 +33,7 @@ function prepareMarkdownFiles() {
         markdownFiles = list.filter( function (item, index ) {
             var file = path.join( box, item );
             var status = fs.statSync( file );
-            return status.isFile() && path.extname( file ) === extname;
+            return status.isFile() &&  extnames.indexOf( path.extname( file ) ) > -1;
         });
         defer.resolve( markdownFiles );
     });
@@ -49,6 +49,7 @@ function readFileInfo( file ) {
     lastModifyTime = stats.mtime || lastModifyTime;
     fs.readFile( file, 'utf8', function ( error, data ) {
         var title = '';
+        var extname = path.extname( file );
         var link = path.relative( __dirname, path.join( box, path.basename(file, extname) ) );
         if ( error ) {
             console.log( error );

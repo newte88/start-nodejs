@@ -3,13 +3,16 @@
 
 
 var fs = require( 'fs' );
-var path = require( 'path' );
-var box = path.resolve( './list' );
-var render = require( './render' );
 
-fs.watch( box, function ( event, filename ) {
-    render.init();
-});
+function init( folder, callback ) {
+    folder = folder || __dirname;
+    callback = callback || function () {};
+    fs.watch( folder, function ( event, filename ) {
+        callback.apply( null, arguments );
+    });
+}
+
+exports.init = init;
 
 
 
